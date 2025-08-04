@@ -2,6 +2,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Search, MessageCircle, MoreHorizontal } from "lucide-react"
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useAuth } from '../context/AuthContext'; // Import useAuth
 
 const chatList = [
   {
@@ -107,6 +109,30 @@ export const ChatSidebar = () => {
           </div>
         ))}
       </div>
+      {/* Logout Button */}
+      <div className="p-4 border-t border-border">
+        <LogoutButton />
+      </div>
     </div>
   )
 }
+
+const LogoutButton = () => {
+  const navigate = useNavigate();
+  const { logout } = useAuth();
+
+  const handleLogout = async () => {
+    await logout();
+    navigate('/login');
+  };
+
+  return (
+    <Button 
+      variant="destructive" 
+      className="w-full"
+      onClick={handleLogout}
+    >
+      Đăng xuất
+    </Button>
+  );
+};

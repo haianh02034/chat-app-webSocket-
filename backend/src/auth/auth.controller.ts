@@ -36,4 +36,10 @@ export class AuthController {
   getMe(@Req() req) {
     return req.user;
   }
+
+  @Post('logout')
+  async logout(@Res({ passthrough: true }) res: Response) {
+    res.clearCookie('access_token');
+    return { message: 'Đăng xuất thành công' };
+  }
 }

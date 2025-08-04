@@ -6,6 +6,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
+import Register from "./pages/Register"; // Import Register page
+import PrivateRoute from "./components/PrivateRoute"; // Import PrivateRoute
+import { AuthProvider } from "./context/AuthContext"; // Import AuthProvider
 
 const queryClient = new QueryClient();
 
@@ -14,14 +17,24 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/chat" element={<Index />} />
-          <Route path="/" element={<Login />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+      <AuthProvider> {/* Wrap with AuthProvider */}
+        <BrowserRouter>
+          <Routes>
+            {/* Public Routes */}
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+
+            {/* Private Routes */}
+            <Route element={<PrivateRoute />}>
+              <Route path="/" element={<Index />} /> {/* Main page after login */}
+              <Route path="/chat" element={<Index />} /> {/* Existing chat route */}
+            </Route>
+
+            {/* Catch-all route */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );
