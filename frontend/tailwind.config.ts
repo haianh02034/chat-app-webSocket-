@@ -52,12 +52,10 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				'chat-bg': 'hsl(var(--chat-bg))',
-				'sidebar-bg': 'hsl(var(--sidebar-bg))',
-				'message-bg': 'hsl(var(--message-bg))',
-				'hover-bg': 'hsl(var(--hover-bg))',
-				'blue-primary': 'hsl(var(--blue-primary))',
-				'blue-glow': 'hsl(var(--blue-glow))',
+				success: {
+					DEFAULT: 'hsl(var(--success))',
+					foreground: 'hsl(var(--success-foreground))'
+				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
@@ -96,7 +94,6 @@ export default {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out'
 			}
-		
 		}
 	},
 	plugins: [require("tailwindcss-animate")],

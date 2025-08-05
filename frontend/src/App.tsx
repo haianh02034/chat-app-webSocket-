@@ -3,7 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
+import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
 import Register from "./pages/Register"; // Import Register page
@@ -26,8 +26,8 @@ const App = () => (
 
             {/* Private Routes */}
             <Route element={<PrivateRoute />}>
-              <Route path="/" element={<Index />} /> {/* Main page after login */}
-              <Route path="/chat" element={<Index />} /> {/* Existing chat route */}
+              <Route path="/" element={<Home />} /> {/* Main page after login */}
+              <Route path="/chat" element={<Home />} /> {/* Existing chat route */}
             </Route>
 
             {/* Catch-all route */}

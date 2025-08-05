@@ -10,6 +10,7 @@ import { MessageSchema, Message } from './messages/message.schema';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { ProfileModule } from './profile/profile.module';
+import { RoomsModule } from './rooms/rooms.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { ProfileModule } from './profile/profile.module';
     UsersModule,
     AuthModule,
     ProfileModule,
+    RoomsModule, // Add RoomsModule here
   ],
   controllers: [],
   providers: [ChatGateway],

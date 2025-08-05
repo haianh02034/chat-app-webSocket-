@@ -1,6 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { useState } from 'react';
 import { Phone, Video, Info, Send, Paperclip, Smile, ThumbsUp } from "lucide-react"
 
 const messages = [
@@ -28,6 +29,8 @@ const messages = [
 ]
 
 export const ChatMain = () => {
+  const [messageInput, setMessageInput] = useState('');
+
   return (
     <div className="flex-1 flex flex-col bg-chat-bg">
       {/* Chat Header */}
@@ -78,7 +81,7 @@ export const ChatMain = () => {
                 className={`px-4 py-2 rounded-2xl ${
                   message.isMe
                     ? 'bg-primary text-primary-foreground ml-auto'
-                    : 'bg-message-bg text-foreground'
+                    : 'bg-gray-200 text-foreground' // Changed from bg-message-bg to bg-gray-200
                 }`}
               >
                 <p className="text-sm">{message.content}</p>
@@ -132,6 +135,8 @@ export const ChatMain = () => {
             <Input
               placeholder="Aa"
               className="pr-20 bg-message-bg border-none rounded-full text-foreground placeholder:text-muted-foreground"
+              value={messageInput}
+              onChange={(e) => setMessageInput(e.target.value)}
             />
             <div className="absolute right-2 top-1/2 transform -translate-y-1/2 flex items-center gap-1">
               <Button variant="ghost" size="icon" className="w-8 h-8 text-muted-foreground hover:text-foreground">
@@ -141,7 +146,7 @@ export const ChatMain = () => {
           </div>
           
           <Button size="icon" className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full">
-            <ThumbsUp size={16} />
+            {messageInput.trim() ? <Send size={16} /> : <ThumbsUp size={16} />}
           </Button>
         </div>
         
