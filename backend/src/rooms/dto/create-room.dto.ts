@@ -7,5 +7,5 @@ export class CreateRoomDto {
 
   @IsArray()
   @IsString({ each: true })
-  members: string[];
+  memberUsernames: string[];
 }

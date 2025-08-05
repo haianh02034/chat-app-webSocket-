@@ -11,7 +11,7 @@ export class RoomsController {
   @UseGuards(JwtAuthGuard)
   createRoom(@Body() dto: CreateRoomDto, @Req() req) {
     const roomName = dto.name || ''; // Provide a default empty string if name is undefined
-    return this.roomService.createRoom(roomName, dto.members, req.user.sub);
+    return this.roomService.createRoom(roomName, dto.memberUsernames, req.user.sub);
   }
 
   @Get('my')

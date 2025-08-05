@@ -14,21 +14,21 @@ interface CreateRoomModalProps {
 
 const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ isOpen, onClose, onRoomCreated }) => {
   const [roomName, setRoomName] = useState('');
-  const [memberIds, setMemberIds] = useState('');
+  const [memberUsernames, setMemberUsernames] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const userIdArray = memberIds.split(',').map(id => id.trim()).filter(id => id.length > 0);
+    const usernameArray = memberUsernames.split(',').map(username => username.trim()).filter(username => username.length > 0);
     
     try {
       await axios.post('http://localhost:3000/rooms/create', {
         name: roomName || '',
-        members: userIdArray
+        memberUsernames: usernameArray
       }, { withCredentials: true });
 
       alert('Tạo phòng thành công');
       setRoomName('');
-      setMemberIds('');
+      setMemberUsernames('');
       onClose();
       onRoomCreated();
     } catch (error) {
@@ -82,15 +82,15 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ isOpen, onClose, onRo
             </div>
             
             <div className="space-y-2">
-              <Label htmlFor="userIds" className="text-sm font-medium text-foreground">
-                ID người dùng <span className="text-destructive">*</span>
+              <Label htmlFor="memberUsernames" className="text-sm font-medium text-foreground">
+                Tên người dùng <span className="text-destructive">*</span>
               </Label>
               <Input
-                id="userIds"
+                id="memberUsernames"
                 type="text"
-                placeholder="Nhập ID người dùng (ngăn cách bằng dấu phẩy)"
-                value={memberIds}
-                onChange={(e) => setMemberIds(e.target.value)}
+                placeholder="Nhập tên người dùng (ngăn cách bằng dấu phẩy)"
+                value={memberUsernames}
+                onChange={(e) => setMemberUsernames(e.target.value)}
                 className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
                 required
               />
@@ -103,7 +103,7 @@ const CreateRoomModal: React.FC<CreateRoomModalProps> = ({ isOpen, onClose, onRo
               <Button
                 type="submit"
                 className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground transition-colors duration-200"
-                disabled={!memberIds.trim()}
+                disabled={!memberUsernames.trim()}
               >
                 Tạo phòng
               </Button>
